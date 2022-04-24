@@ -26,4 +26,44 @@ public class MarkdownParseTest {
 
         assertEquals(expected,links);
     }
+
+    @Test
+    public void test2GetLinks() throws IOException
+    {
+        Path fileName = Path.of("test-file2.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("https://canvas.ucsd.edu");
+        expected.add("https://docs.oracle.com/javase/7/docs/api/java/lang/String.html");
+
+        assertEquals(expected,links);
+    }
+
+    @Test
+    public void test3GetLinks() throws IOException
+    {
+        Path fileName = Path.of("test-file3.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("");
+
+        assertEquals(expected,links);
+    }
+
+    @Test
+    public void test4GetLinks() throws IOException
+    {
+        Path fileName = Path.of("test-file4.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = MarkdownParse.getLinks(content);
+
+        ArrayList<String> expected = new ArrayList<String>();
+        expected.add("");
+
+        assertEquals(expected, links);
+    }
 }
