@@ -49,7 +49,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(content);
 
         ArrayList<String> expected = new ArrayList<String>();
-        expected.add("");
+        expected.add("abc");
 
         assertEquals(expected,links);
     }
@@ -62,7 +62,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(content);
 
         ArrayList<String> expected = new ArrayList<String>();
-        expected.add("");
+        expected.add("https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule?authuser=0");
 
         assertEquals(expected, links);
     }
