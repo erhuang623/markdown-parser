@@ -75,7 +75,7 @@ public class MarkdownParseTest {
         ArrayList<String> links = MarkdownParse.getLinks(content);
 
         ArrayList<String> expected = new ArrayList<String>();
-        expected.add("()()()()()()()()()()");
+        expected.add("");
 
         assertEquals(expected, links);
     }
