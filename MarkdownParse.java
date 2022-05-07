@@ -29,7 +29,7 @@ public class MarkdownParse {
             int closeParen = markdown.indexOf(")", openParen); //29, 23
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1; //0, 0, 30, 24
-            
+            //change
         }
 
         return toReturn;
