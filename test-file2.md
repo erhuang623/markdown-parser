@@ -1,6 +1,4 @@
-# Title
+# title
 
-[a link!](https://something.com)
-[another link!](some-page.html)
-
-some paragraph text after the links
+[Link](https://canvas.ucsd.edu)t)
+[Link2](https://docs.oracle.com/javase/7/docs/api/java/lang/String.html)

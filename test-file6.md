@@ -1,3 +1,7 @@
-# title 
+`[a link`](url.com)
 
-![link](page.com)
+[another link](`google.com)`
+
+[`cod[e`](google.com)
+
+[`code]`](ucsd.edu)
