@@ -65,12 +65,9 @@ public class MarkdownParse {
 
 
     public static void main(String[] args) throws IOException {
-        Path fileName = Path.of(args[0]);
-        String content = Files.readString(fileName);
-        ArrayList<String> links = getLinks(content);
-	    System.out.println(links);
-
-        System.out.println("lab4");
-        System.out.println(MarkdownParse.getLinks("part4-file.md"));
+        Path fileName = Path.of("test-file8.md");
+        String contents = Files.readString(fileName);
+        ArrayList<String> links = getLinks(contents);
+        System.out.println(links);
     }
 }
