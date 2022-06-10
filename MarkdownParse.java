@@ -1,12 +1,7 @@
-// File reading code from https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MarkdownParse {
 
@@ -14,34 +9,68 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
+        int charIndex = 0;
         while(currentIndex < markdown.length()) {
-             
-            if (markdown.indexOf("(") == -1 && markdown.indexOf(")") == -1 && markdown.indexOf("[") == -1 && markdown.indexOf("]") == -1){
-                toReturn.add(markdown);
-                return toReturn;
+            int openBracket = markdown.indexOf("[", currentIndex);
+            int closeBracket = markdown.indexOf("]", openBracket);
+            int openParen = markdown.indexOf("(", closeBracket);
+            int closeParen = markdown.indexOf(")", openParen);
+            currentIndex = closeParen + 1;
+
+            if (openBracket > 0 && markdown.charAt(openBracket - 1) == '!') {
+                currentIndex = closeParen;
+                continue;
             }
 
-            if(markdown.indexOf("(") == -1 && markdown.indexOf(")") == -1)
-            {
-                toReturn.add("");
-                return toReturn;
-            }   
-            int openBracket = markdown.indexOf("[", currentIndex); //0
-            int closeBracket = markdown.indexOf("]", openBracket); //6
-            int openParen = markdown.indexOf("(", closeBracket); //7
-            int closeParen = markdown.indexOf(")", openParen); //29, 23
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1; //0, 0, 30, 24
-            //change
+            if (currentIndex <= charIndex) {
+                charIndex ++;
+            }
+            else {
+                charIndex = currentIndex;
+                toReturn.add(markdown.substring(openParen + 1, closeParen));
+            }
+
+            if (charIndex == markdown.length() - 1) {
+                break;
+            }
+
+            //toReturn.add(markdown.substring(openParen + 1, closeParen));
+
         }
+
+        int lessThan = 0;
+        int greaterThan = 0;
+
+        for(int i = 0; i < markdown.length(); i ++) {
+            if (markdown.charAt(i) == '<') {
+                lessThan = i;
+                boolean there = true;
+                while(there) {
+                    if (markdown.charAt(i) == '>') {
+                        greaterThan = i;
+                        there = false;
+                    }
+                    else {
+                        i ++;
+                    }
+                }
+                toReturn.add(markdown.substring(lessThan + 1, greaterThan));
+                lessThan = 0;
+                greaterThan = 0;
+            }
+        }
+
         return toReturn;
     }
-   
-   
+
+
     public static void main(String[] args) throws IOException {
-        Path fileName = Path.of("test-file8.md");
-        String contents = Files.readString(fileName);
-        ArrayList<String> links = getLinks(contents);
-        System.out.println(links);
+        Path fileName = Path.of(args[0]);
+        String content = Files.readString(fileName);
+        ArrayList<String> links = getLinks(content);
+	    System.out.println(links);
+
+        System.out.println("lab4");
+        System.out.println(MarkdownParse.getLinks("part4-file.md"));
     }
 }
